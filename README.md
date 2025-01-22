@@ -11,7 +11,7 @@
 ## Installation
 Run the following command to install the dependencies:
 ```
-# Python version 3 is required to run and use the tools in this repository
+# Python 3 is necessary use the tools in this repository
 $ pip install -r requirements.txt
 ```
 

@@ -18,7 +18,7 @@ $ pip install -r requirements.txt
 ## Authors: 
 1. Kushankur Ghosh
 2. Murilo Coelho Naldi
-3. J{\"o}rg Sander
+3. Jörg Sander
 4. Euijin Choo
 
 ## Citation: 

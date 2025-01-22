@@ -8,6 +8,8 @@ import hdbscan
 
 from utils import find_max_index
 
+from find_elbow.elbow import ElbowMptsFinder
+
 # Auto-GLOSH algorithm
 def auto_glosh(profiles, data):
     similarity = []
@@ -17,16 +19,16 @@ def auto_glosh(profiles, data):
     similarity = np.array(similarity[:-2] if len(profiles) < 100 else similarity)
     arg = find_max_index(similarity)
 
-    # Find knee point
-    kneedle = KneeFinderSim(range(len(similarity[arg:])), similarity[arg:])
-    knee, _ = kneedle.find_knee()
-    mpts = int(knee[0]) + arg + 1
+    # Find elbow point
+    elbowf = ElbowMptsFinder(range(len(similarity[arg:])), similarity[arg:])
+    elbow_idx, _ = elbowf.find_elbow()
+    mpts_star = int(elbow_idx[0]) + arg + 1
 
     # HDBSCAN clustering
     clusterer = hdbscan.HDBSCAN(
         algorithm='generic', alpha=1.0, approx_min_span_tree=False,
         gen_min_span_tree=True, metric='euclidean',
-        min_cluster_size=mpts + 2, min_samples=mpts + 2
+        min_cluster_size=mpts_star + 2, min_samples=mpts_star + 2
     )
     clusterer.fit(data.iloc[:, :-1])
     glosh_scores = np.nan_to_num(clusterer.outlier_scores_, nan=0)

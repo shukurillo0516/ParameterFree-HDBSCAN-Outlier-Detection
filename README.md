@@ -25,7 +25,7 @@ $ pip install -r requirements.txt
 ```
 @inproceedings{ghosh2024unsupervised,
   title={Unsupervised Parameter-free Outlier Detection using HDBSCAN* Outlier Profiles},
-  author={Ghosh, Kushankur and Naldi, Murilo Coelho and Sander, J{\"o}rg and Choo, Euijin},
+  author={Ghosh, Kushankur and Naldi, Murilo Coelho and Sander, Jörg and Choo, Euijin},
   booktitle={2024 IEEE International Conference on Big Data (BigData)},
   pages={7021--7030},
   year={2024},

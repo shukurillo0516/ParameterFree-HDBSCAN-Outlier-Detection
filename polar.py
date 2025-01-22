@@ -8,26 +8,27 @@ import hdbscan
 
 from utils import find_max_index
 
-# Auto-GLOSH algorithm
-def auto_glosh(profiles, data):
-    similarity = []
-    for mpts in range(1, 101):
-        similarity.append(1 - abs(stats.pearsonr(profiles.iloc[:, mpts - 1], profiles.iloc[:, mpts])[0]))
-
-    similarity = np.array(similarity[:-2] if len(profiles) < 100 else similarity)
-    arg = find_max_index(similarity)
+# POLAR algorithm
+def polar(glosh_scores, data):
+    glosh_scores_lab = sorted([[score, idx, label] for idx, (score, label) in enumerate(zip(glosh_scores, data.iloc[:, -1]))], key=lambda x: x[0])
+    sorted_glosh_scores = sorted(glosh_scores)
 
     # Find knee point
-    kneedle = KneeFinderSim(range(len(similarity[arg:])), similarity[arg:])
-    knee, _ = kneedle.find_knee()
-    mpts = int(knee[0]) + arg + 1
+    indexes = list(range(len(sorted_glosh_scores)))
+    kf = KneeFinder(indexes, sorted_glosh_scores)
+    knee_x, _ = kf.find_knee()
+    knee_x = int(knee_x[0])
 
-    # HDBSCAN clustering
-    clusterer = hdbscan.HDBSCAN(
-        algorithm='generic', alpha=1.0, approx_min_span_tree=False,
-        gen_min_span_tree=True, metric='euclidean',
-        min_cluster_size=mpts + 2, min_samples=mpts + 2
-    )
-    clusterer.fit(data.iloc[:, :-1])
-    glosh_scores = np.nan_to_num(clusterer.outlier_scores_, nan=0)
-    return glosh_scores
+    # Intersection and thresholds
+    intersections = kf.find_intersection_point()
+    intersect = intersections[next(idx for idx, cntr in enumerate(indexes) if cntr == knee_x)]
+
+    x0, y0 = intersect[0][0], intersect[1][0]
+    x2, y2 = indexes[-1], linregress(indexes, sorted_glosh_scores)[0] * indexes[-1] + linregress(indexes, sorted_glosh_scores)[1]
+
+    x_line, y_line = line_through_points(x0, y0, x2, y2)
+    x_intersects, _ = intersection(indexes, sorted_glosh_scores, x_line, y_line)
+    inlier_thres_1 = sorted_glosh_scores[knee_x]
+    inlier_thres_2 = sorted_glosh_scores[round(x_intersects[-1])]
+
+    return inlier_thres_1, inlier_thres_2

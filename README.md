@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-***(Published in 2024 IEEE International Conference on Big Data (BigData))***
+***Published in 2024 IEEE International Conference on Big Data (BigData)***
 
 **Paper URL:** [https://openreview.net/forum?id=lh6vOAHuvo](https://ieeexplore.ieee.org/abstract/document/10825917)
 

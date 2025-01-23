@@ -1,0 +1,11 @@
+pandas
+numpy
+glob2
+hdbscan
+matplotlib
+scipy
+kneed
+ruptures
+scikit-learn
+intersect  # Ensure this library exists or specify its actual name if it's custom.
+tqdm

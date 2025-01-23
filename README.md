@@ -16,10 +16,10 @@ $ pip install -r requirements.txt
 ```
 
 ## Authors: 
-1. Kushankur Ghosh
-2. Murilo Coelho Naldi
-3. Jörg Sander
-4. Euijin Choo
+1. Kushankur Ghosh (kushanku@ualberta.ca)
+2. Murilo Coelho Naldi (naldi@ufscar.br)
+3. Jörg Sander (jsander@ualberta.ca)
+4. Euijin Choo (euijin@ualberta.ca)
 
 ## Citation: 
 ```

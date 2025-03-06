@@ -1,3 +1,7 @@
+from typing import Union
+import numpy as np
+
+
 class ElbowMptsFinder:
     """
     Elbow minpts finder.

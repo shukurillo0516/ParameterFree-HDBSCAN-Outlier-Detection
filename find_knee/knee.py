@@ -1,3 +1,6 @@
+from typing import Union
+import numpy as np
+
 class KneeThersholdFinder:
     """
     Knee threshold finder.

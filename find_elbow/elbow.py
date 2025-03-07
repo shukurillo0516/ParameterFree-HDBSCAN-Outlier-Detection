@@ -12,7 +12,7 @@ class ElbowMptsFinder:
 
     def __init__(self, x_values: Union[list, np.ndarray], y_values: Union[list, np.ndarray, None] = None, clean_data: bool = True):
         """
-        Initialize the ElbowFinder with x and y data.
+        Initialize the ElbowMptsFinder with x and y data.
 
         :param x_values: List or array of x-coordinates.
         :param y_values: List or array of y-coordinates (optional if x_values is a 2D array).

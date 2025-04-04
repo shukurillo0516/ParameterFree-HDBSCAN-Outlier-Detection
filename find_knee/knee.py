@@ -3,19 +3,19 @@ import numpy as np
 
 class KneeThersholdFinder:
     """
-    Knee threshold finder.
+    Knee threshold finder
 
     This tool searches for the point that has the max orthogonal distance to a line
-    passing through the first and last points of the given data set.
+    passing through the first and last points of the given data set
     """
 
     def __init__(self, x_values: Union[list, np.ndarray], y_values: Union[list, np.ndarray, None] = None, clean_data: bool = True):
         """
-        Initialize the KneeThresholdFinder with x and y data.
+        Initializing the KneeThresholdFinder with x and y data
 
-        :param x_values: List or array of x-coordinates.
-        :param y_values: List or array of y-coordinates (optional if x_values is a 2D array).
-        :param clean_data: Whether to remove duplicate values at the start and end of the data.
+        :param x_values: List or array of x-coordinates
+        :param y_values: List or array of y-coordinates (optional if x_values is a 2D array)
+        :param clean_data: Whether to remove duplicate values at the start and end of the data
         """
         if isinstance(x_values, np.ndarray) and y_values is None:
             assert x_values.shape[0] == 2, "x_values must be a 2D array with two rows."
@@ -39,7 +39,7 @@ class KneeThersholdFinder:
 
     def _clean_data(self):
         """
-        Remove duplicate values at the beginning and end of the data.
+        removing duplicate values at the beginning and end of the data
         """
         start_index = 0
         end_index = len(self.data[1])
@@ -56,9 +56,8 @@ class KneeThersholdFinder:
 
     def find_knee(self) -> np.ndarray:
         """
-        Find the knee point in the data set.
-
-        :return: The coordinates of the knee point.
+        finding the knee point in the data set
+        :return: The coordinates of the knee point
         """
         if self.knee is not None:
             return self.knee
@@ -72,9 +71,8 @@ class KneeThersholdFinder:
 
     def find_intersection_points(self) -> list:
         """
-        Find the intersection points between the line and the data points.
-
-        :return: List of intersection points.
+        Finding the intersection points between the line and the data points
+        :return: List of intersection points
         """
         intersections = []
         for i in range(len(self.data[0])):

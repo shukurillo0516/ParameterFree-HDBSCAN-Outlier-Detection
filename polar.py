@@ -4,14 +4,18 @@ from scipy import stats
 import matplotlib.pyplot as plt
 import hdbscan
 
-from utils import find_max_index
+from utils import find_max_index, line_through_points
 from intersect import intersection
 
 from find_knee.knee import KneeThersholdFinder
 
+
 # POLAR algorithm
 def polar(glosh_scores, data):
-    glosh_scores_lab = sorted([[score, idx, label] for idx, (score, label) in enumerate(zip(glosh_scores, data.iloc[:, -1]))], key=lambda x: x[0])
+    glosh_scores_lab = sorted(
+        [[score, idx, label] for idx, (score, label) in enumerate(zip(glosh_scores, data.iloc[:, -1]))],
+        key=lambda x: x[0],
+    )
     sorted_glosh_scores = sorted(glosh_scores)
 
     # Find knee point
@@ -25,7 +29,10 @@ def polar(glosh_scores, data):
     intersect = intersections[next(idx for idx, cntr in enumerate(indexes) if cntr == knee_idx)]
 
     x0, y0 = intersect[0][0], intersect[1][0]
-    x2, y2 = indexes[-1], linregress(indexes, sorted_glosh_scores)[0] * indexes[-1] + linregress(indexes, sorted_glosh_scores)[1]
+    x2, y2 = (
+        indexes[-1],
+        linregress(indexes, sorted_glosh_scores)[0] * indexes[-1] + linregress(indexes, sorted_glosh_scores)[1],
+    )
 
     x_line, y_line = line_through_points(x0, y0, x2, y2)
     x_intersects, _ = intersection(indexes, sorted_glosh_scores, x_line, y_line)

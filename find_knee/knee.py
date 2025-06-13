@@ -1,6 +1,7 @@
 from typing import Union
 import numpy as np
 
+
 class KneeThersholdFinder:
     """
     Knee threshold finder
@@ -9,7 +10,9 @@ class KneeThersholdFinder:
     passing through the first and last points of the given data set
     """
 
-    def __init__(self, x_values: Union[list, np.ndarray], y_values: Union[list, np.ndarray, None] = None, clean_data: bool = True):
+    def __init__(
+        self, x_values: Union[list, np.ndarray], y_values: Union[list, np.ndarray, None] = None, clean_data: bool = True
+    ):
         """
         Initializing the KneeThresholdFinder with x and y data
 
@@ -77,8 +80,7 @@ class KneeThersholdFinder:
         intersections = []
         for i in range(len(self.data[0])):
             t = np.dot(
-                np.array([self.data[0][i], self.data[1][i]]) - self.start_point.flatten(),
-                self.line_vector.flatten()
+                np.array([self.data[0][i], self.data[1][i]]) - self.start_point.flatten(), self.line_vector.flatten()
             ) / np.dot(self.line_vector.flatten(), self.line_vector.flatten())
 
             intersection_point = self.start_point + t * self.line_vector
